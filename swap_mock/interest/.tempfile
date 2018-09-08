@@ -1,0 +1,13 @@
+=========
+Asset UAI
+=========
+
+hash256 this {data_packet1(assetType, description, interestRate, 
+                floating, basis)}
+
+and 
+hash256 this {amount, consoritum, registrar, 
+                weight, validThrough}
+
+
+now take hash1 and hash2, join them together hash1hash2 and then hash256 that

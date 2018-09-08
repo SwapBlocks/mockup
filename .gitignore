@@ -1,2 +1,5 @@
 .envrc
 .direnv/**
+*.swp
+**__pycache__**
+**.pyc

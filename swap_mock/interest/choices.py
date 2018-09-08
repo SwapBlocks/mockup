@@ -1,8 +1,8 @@
 ASSET_TYPES = [
-    ("interestRateSwap": "Interest Rate Swap"),
-    ("realEstate": "Real Estate"),
-    ("creditDefaultSwap": "Credit Default Swap"),
-    ("futures": "Futures Contract")
+    ("interestRateSwap", "Interest Rate Swap"),
+    ("realEstate", "Real Estate"),
+    ("creditDefaultSwap", "Credit Default Swap"),
+    ("futures", "Futures Contract")
 ]
 
 CONSORTIUMS = [
@@ -19,6 +19,11 @@ TRANSACTION_TYPES = [
     ("currency", "Currency"),
     ("assetGenesis", "Asset Genesis"),
     ("assetTransfer", "Asset Transfer"),
-    ("assetSwap": "Asset Swap"),
-    ("assetProbe": "Asset Probe")
+    ("assetSwap", "Asset Swap"),
+    ("assetProbe", "Asset Probe")
+]
+
+BENCHMARKS = [
+    ("LIBOR", "LIBOR"),
+    ("TBILL", "T-bill")
 ]
