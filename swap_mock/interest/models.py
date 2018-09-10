@@ -105,6 +105,10 @@ def asset_post_save(sender, instance, created=False, **kwargs):
             instance.UAI = UAI.decode()
             instance.save()
 
+            # Now create a new asset genesis transaction
+            Transaction.objects.create(
+            # Broadcast transaction to the network
+
         except Exception as e:
            # Do other stuff
            print("Error: asset already created.")
@@ -118,6 +122,21 @@ def transaction_post_save(sender, instance, created=False, **kwargs):
             # Set sender to the senders public address
             instance.sender = PUBLIC_ADDRESS
             instance.save()
+
+            serial_asset = serializers.serialize('json', [instance, ])
+            json_asset = json.loads(serial_asset)
+            needed_fields = json_asset[0]['fields']
+            keys = ['transactionType', 'sender', 'receipeint', 'amount')
+            standard_data = json.dumps({key: needed_fields[key]
+                for key in keys}).encode()
+            # Concatenate byte strings dp1 + stnd, hash it and convert to hex
+            id_bytes = hashlib.sha3_256(packet_hash + standard_data).digest()
+            transactionID = hexlify(id_bytes)
+            instance.transactionId = transactionID.decode()
+
+            # Set and save
+            instance.save()
+
         except:
             # Do nothing
             print("sender must already be set.")
