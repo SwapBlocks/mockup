@@ -2,11 +2,13 @@ ASSET_TYPES = [
     ("interestRateSwap", "Interest Rate Swap"),
     ("realEstate", "Real Estate"),
     ("creditDefaultSwap", "Credit Default Swap"),
-    ("futures", "Futures Contract")
+    ("futures", "Futures Contract"),
+    ("index", "INDEX")
 ]
 
 CONSORTIUMS = [
-    ("someConsortiumHashId", "Global Interest Rate Swap Group")
+    ("someConsortiumHashId", "Global Interest Rate Swap Group"),
+    ("index", "Weighted Index Consortium")
 ]
 
 WEIGHTS = [
