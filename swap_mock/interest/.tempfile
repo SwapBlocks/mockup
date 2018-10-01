@@ -16,15 +16,10 @@ now take hash1 and hash2, join them together hash1hash2 and then hash256 that
 ================
 Transaction
 ================
-transactionType (from list)
-sender
-receipeint (always the sender in a genesis transaction)
-amount
-registrationAsset(linked to the registered asset)
+transactionType, sender, receipeint, amount, standardAsset, makerAsset,
+takerAsset, consortium, transactionId, consortiumPacketHash,
+municipalPacketHash, consortiumPacket, municipalPacket,  
+confirmations
 
-makerAsset (blank in this case)
-takerAsset (blank in this case)
 
-transactionId (should be added in post_save)
-    {transactionType, sender, receipeint, amount, registrationAsset(if not
-    null), makerAsset(ifNotNull), takerAsset(if not null)}
+
