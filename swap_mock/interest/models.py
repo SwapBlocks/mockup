@@ -13,6 +13,8 @@ import json
 import hashlib
 from binascii import hexlify
 from datetime import datetime, timedelta
+import codecs
+from polymorphic.models import PolymorphicModel
 
 
 def default_end_time():
@@ -22,7 +24,7 @@ def default_end_time():
 # Create your models here.
 
 
-class Asset(models.Model):
+class Asset(PolymorphicModel):
     # SWAPBlocks Requirements
     amount = models.BigIntegerField()
     consortium = models.CharField(choices=CONSORTIUMS,
@@ -37,6 +39,9 @@ class Asset(models.Model):
 
     def __str__(self):
         return f"AssetId: {self.UAI}"
+
+    # class Meta:
+        # abstract = True
 
 
 class InterestRateSwap(Asset):
@@ -148,9 +153,9 @@ def asset_post_save(sender, instance, created=False, **kwargs):
                 standardAsset=instance,
                 receipeint=PUBLIC_ADDRESS,
                 consortiumPacket=consortium_data,
-                consortiumPacketHash=consortium_packet_hash,
+                consortiumPacketHash=consortium_packet_hash.hex(),
                 municipalPacket=municipal_data,
-                municipalPacketHash=municipal_packet_hash
+                municipalPacketHash=municipal_packet_hash.hex()
             )
             # Broadcast transaction to the network
             print(f"""
@@ -174,8 +179,12 @@ def irswap_post_save(sender, instance, created=False, **kwargs):
             instance.save()
 
             # serialize object and extract fields needed for hashing
+            from pprint import pprint
+            pprint(dir(instance))
             serial_asset = serializers.serialize('json', [instance, ])
             json_asset = json.loads(serial_asset)
+            print("------------------------------------")
+            pprint(json_asset)
             needed_fields = json_asset[0]['fields']
             consortium_keys = ['assetType', 'description', 'basis', 'floating']
             oth_keys = ['amount', 'consortium',
@@ -195,22 +204,22 @@ def irswap_post_save(sender, instance, created=False, **kwargs):
                 municipal_packet_hash = hashlib.sha3_256(encoded_municipal_data
                                                       ).digest()
             else:
-                municipal_packet_hash = ''
+                municipal_packet_hash = b''
             if consortium_data:
                 encoded_consortium_data = consortium_data.encode()
                 consortium_packet_hash = hashlib.sha3_256(
                     encoded_consortium_data).digest().decode()
             else:
-                consortium_packet_hash = ''
+                consortium_packet_hash = b''
             packet_to_hash = municipal_packet_hash + consortium_packet_hash
             if packet_to_hash:
-                packet_hash = hashlib.sha3_256(packet_to_hash.encode()).digest()
+                packet_hash = hashlib.sha3_256(packet_to_hash).digest()
             else:
-                packet_hash = ''
+                packet_hash = b''
             standard_data = hashlib.sha3_256(standard_data).digest()
 
             # Concatenate byte strings dp1 + stnd, hash it and convert to hex
-            uai_bytes = hashlib.sha3_256(packet_hash.encode() + standard_data).digest()
+            uai_bytes = hashlib.sha3_256(packet_hash + standard_data).digest()
             UAI = f"{instance.weight}{hexlify(uai_bytes).decode()}"
 
             # Set and save
@@ -224,9 +233,9 @@ def irswap_post_save(sender, instance, created=False, **kwargs):
                 standardAsset=instance,
                 receipeint=PUBLIC_ADDRESS,
                 consortiumPacket=consortium_data,
-                consortiumPacketHash=consortium_packet_hash,
+                consortiumPacketHash=consortium_packet_hash.hex(),
                 municipalPacket=municipal_data,
-                municipalPacketHash=municipal_packet_hash
+                municipalPacketHash=municipal_packet_hash.hex()
             )
             # Broadcast transaction to the network
             print(f"""
@@ -234,7 +243,8 @@ def irswap_post_save(sender, instance, created=False, **kwargs):
                   for asset {UAI}
                   """)
         except Exception as e:
-           # Do other stuff
+            # Do other stuff
+            print('error')
             print(e)
 
 
@@ -271,9 +281,9 @@ def transaction_post_save(sender, instance, created=False, **kwargs):
             standard_data = json.dumps({key: needed_fields[key]
                 for key in keys}, sort_keys=True).encode()
 
-            packet_hash = instance.municipalPacketHash + instance.consortiumPacketHash
+            packet_hash = instance.municipalPacketHash.encode() + instance.consortiumPacketHash.encode()
             # Concatenate byte strings dp1 + stnd, hash it and convert to hex
-            id_bytes = hashlib.sha3_256(packet_hash.encode() + standard_data
+            id_bytes = hashlib.sha3_256(packet_hash + standard_data
                                         ).digest()
             transactionID = hexlify(id_bytes)
             instance.transactionId = transactionID.decode()
