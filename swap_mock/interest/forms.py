@@ -16,3 +16,8 @@ class IndexAssetForm(forms.ModelForm):
             "consortiumPacket": "Consortium Packet"
         }
 
+
+class TransactionForm(forms.ModelForm):
+
+    class Meta:
+        model = Transaction

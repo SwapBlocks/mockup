@@ -113,7 +113,14 @@ def transaction_post_save(sender, instance, created=False, **kwargs):
                                   ] = instance.makerAsset.UAI
                     needed_fields['takerAsset'
                                   ] = instance.takerAsset.UAI
-
+            if instance.consortiumPacket:
+                packet_cp = instance.consortiumPacket.encode()
+                instance.consortiumPacketHash = hashlib.sha3_256(
+                packet_cp).hexdigest()
+            if instance.municipalPacket:
+               packet_mp = instance.consortiumPacket.encode()
+               instance.municipalPacketHash = hashlib.sha3_256(
+               packet_mp).hexdigest()
                 # Add transaction sections to hash based on transaction type
                 # pass
             standard_data = json.dumps({key: needed_fields[key]

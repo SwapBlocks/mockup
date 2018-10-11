@@ -4,7 +4,6 @@ from .choices import (
     WEIGHTS, TRANSACTION_TYPES,
     BENCHMARKS
 )
-from .constants import SECRET_PASSPHRASE, PUBLIC_ADDRESS, PUBLIC_KEY
 from datetime import datetime, timedelta
 
 
@@ -68,3 +67,6 @@ class Transaction(models.Model):
 class OrderBook(models.Model):
     mempool = models.ManyToManyField(Transaction, blank=True)
 
+
+class Index(models.Model):
+    pass
