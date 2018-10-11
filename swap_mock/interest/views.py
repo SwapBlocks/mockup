@@ -14,3 +14,11 @@ def create_asset(request):
 
 def create_transaction(request):
     return HttpResponse("Create transaction View")
+
+
+
+# ETF
+# Make an index fund asset where someone can add a new index fund
+
+# The index fund should be linked to a consoritium
+
