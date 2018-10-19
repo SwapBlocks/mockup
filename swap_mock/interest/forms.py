@@ -6,7 +6,7 @@ class IndexAssetForm(forms.ModelForm):
 
     class Meta:
         model = Asset
-        field = ["amount", "consortium", "weight",
+        fields = ["amount", "consortium", "weight",
                  "validThrough", "consortiumPacket",]
         labels = {
             "amount": "Amount",
@@ -21,3 +21,7 @@ class TransactionForm(forms.ModelForm):
 
     class Meta:
         model = Transaction
+        fields = ["transactionType", "receipeint", "amount",
+                  "standardAsset", "makerAsset", "takerAsset",
+                  "consortium", "consortiumPacket", "municipalPacket"]
+

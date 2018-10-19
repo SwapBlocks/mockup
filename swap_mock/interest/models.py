@@ -61,12 +61,8 @@ class Transaction(models.Model):
         return f"Transaction: {self.transactionId}"
 
     class Meta:
-        ordering = ['-timestamp']
+        ordering = ['timestamp']
 
 
 class OrderBook(models.Model):
     mempool = models.ManyToManyField(Transaction, blank=True)
-
-
-class Index(models.Model):
-    pass

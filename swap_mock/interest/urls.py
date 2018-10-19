@@ -8,7 +8,7 @@ app_name = "interest"
 
 urlpatterns = [
     path('', views.home),
-    path('orderbook', views.order_book),
-    path('asset', views.create_asset),
-    path('transaction', views.create_transaction),
+    path('orderbook', views.order_book, name="orderbook"),
+    path('asset', views.create_asset, name="asset"),
+    path('transaction', views.create_transaction, name="transaction"),
 ]
