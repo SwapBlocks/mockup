@@ -14,7 +14,9 @@ def home(request):
     Renders the first page  which should display a default ETF(index) asset
     with live value data from coinmarketcap.com
     """
-    return render(request, "interest/index.html", {})
+    context = {"asset1": "UAI04ff9a3da154fcba054aa7ff4b1ad43def3e057cd23131753de97d69175f5bbcf",
+               "asset2": "UAI1b70310e013c00bed2ba22b5fe423c1bfb8b94f148d2a52031b944ae6fd002208"}
+    return render(request, "interest/index.html", context)
 
 def order_book(request):
     """

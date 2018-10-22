@@ -5,7 +5,12 @@
 
 	<div class="container">
 			<div class="row">
-					<div class="col-12">
+				<div class="col">
+					<br />
+					<h4>Index Prices Last 7 Days</h4>
+					<br />	
+				</div>
+				<div class="col-12">
 							<div class="card">
 									<div class="card-body">
 											<canvas id="chLine"></canvas>
@@ -21,36 +26,52 @@
 </div>
 </section>
 	<script>
-	var chartData = {
-		labels: ["S", "M", "T", "W", "T", "F", "S"],
-		datasets: [{
-				data: [589, 445, 483, 503, 689, 692, 634],
-			},
-			{
-				data: [639, 465, 493, 478, 589, 632, 674],
-			}]
-		};
+	/* chart.js chart examples */
+
+	// chart colors
+	var colors = ['#007bff','#28a745','#333333','#c3e6cb','#dc3545','#6c757d'];
+
+	/* large line chart */
 	var chLine = document.getElementById("chLine");
+	var chartData = {
+		labels: ["20181016", "20181017","20181018", "20181019", "20181020","20181021", "20181022"],
+		datasets: [{
+			label: "{{ asset1 }}",
+			data: [589, 445, 483, 503, 689, 692, 634],
+			backgroundColor: 'transparent',
+			borderColor: colors[0],
+			borderWidth: 4,
+			pointBackgroundColor: colors[0]
+		},
+		{
+			label: "{{ asset2 }}",
+			data: [639, 465, 493, 478, 589, 632, 674],
+			backgroundColor: colors[3],
+			borderColor: colors[1],
+			borderWidth: 4,
+			pointBackgroundColor: colors[1]
+		}]
+	};
+
 	if (chLine) {
 		new Chart(chLine, {
 		type: 'line',
 		data: chartData,
 		options: {
-    scales: {
-      yAxes: [{
-        ticks: {
-          beginAtZero: false
-        }
-      }]
-    },
-    legend: {
-      display: false
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: false
+					}
+				}]
+			},
+			legend: {
+				display: true 
 			}
 		}
 		});
-		}
-
-	</script>
+	}
+		</script>
 
 
 
