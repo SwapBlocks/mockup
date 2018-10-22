@@ -45,7 +45,10 @@ def create_transaction(request):
     if request.POST:
         if transaction_form.is_valid():
             transaction_form.save()
-            return redirect("interest:home")
+            transaction_form = TransactionForm(request.POST or None)
+            message = f"Raw Transaction: {last_transaction()}"
+            messages.success(request,
+                             f"Success Transaction Created: {message}")
     return render(request, "interest/transaction.html", context)
 
 
@@ -62,16 +65,28 @@ def index_lookup(UAI):
 
 def last_asset():
     """
-    Return latest asset and transaction.
+    Return latest asset as json.
     """
     last_asset = Asset.objects.latest('timestamp')
     serial_asset = serializers.serialize('json', [last_asset])
     json_asset = json.loads(serial_asset)
     needed_fields = json_asset[0]['fields']
     needed_fields.pop('timestamp')
+    transaction = last_transaction()
+    needed_fields['transactionId'] = transaction.transactionId
     return needed_fields
 
 
+def last_transaction():
+    """
+    Return latest transaction as json
+    """
+    last_transaction = Transaction.objects.latest('timestamp')
+    serial_transaction = serializers.serialize('json', [last_transaction])
+    json_transaction = json.loads(serial_transaction)
+    needed_fields = json_transaction[0]['fields']
+    needed_fields.pop('timestamp')
+    return needed_fields
 
 def get_coin_data(string_a_coin_name,string_start_date,string_end_date):
     coin_name = string_a_coin_name

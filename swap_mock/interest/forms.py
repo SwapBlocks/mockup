@@ -23,5 +23,13 @@ class TransactionForm(forms.ModelForm):
         model = Transaction
         fields = ["transactionType", "receipeint", "amount",
                   "standardAsset", "makerAsset", "takerAsset",
-                  "consortium", "consortiumPacket", "municipalPacket"]
-
+                  "consortium", "consortiumPacket", "municipalPacket",
+                  "validThrough"]
+        labels = {"transactionType": "Transaction Type",
+                  "receipeint": "Receipeint", "amount": "Amount",
+                  "standardAsset": "Standard Asset",
+                  "makerAsset": "Maker Asset", "takerAsset": "Taker Asset",
+                  "consortium": "Consortium",
+                  "consortiumPacket": "Consortium Packet",
+                  "municipalPacket": "Municipal Packet",
+                  "validThrough": "Valid Through"}
