@@ -1,8 +1,24 @@
-{% extends 'base.html' %}
+{% extends 'baseform.html' %}
+{% load crispy_forms_tags %}
 {% block body %}
 <h1> Create Asset </h1>
+<br />
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 
 
+<form method="post">
+  
+    {% csrf_token %}
+    {{ IndexAssetForm|crispy }}
+    <input type="submit" value="Submit">
 
-
+  </form>
+  <br />
 {% endblock %}

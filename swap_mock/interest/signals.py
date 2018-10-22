@@ -71,6 +71,7 @@ def asset_post_save(sender, instance, created=False, **kwargs):
                 transactionType="assetGenesis",
                 standardAsset=instance,
                 receipeint=PUBLIC_ADDRESS,
+                validThrough=instance.validThrough,
                 consortiumPacket=consortium_data,
                 consortiumPacketHash=consortium_packet_hash.hex(),
                 municipalPacket=municipal_data,

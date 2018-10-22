@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+	<meta charset="UTF-8">
+
+  <link rel="icon" type="image/png" href="{% static "images/favicon.ico" %}"/>
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+{% block head %}
+
+<!-- everything in this section is from a template -->
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+<!--<link rel="stylesheet" type="text/css" href="{% static "css/util.css" %}">-->
+<!--<link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">-->
+<link rel="stylesheet" type="text/css" href="{% static "css/sbx.css" %}">
+
+<!--===============================================================================================-->
+
+
+
+
+{% endblock %}
+    <meta charset="UTF-8">
+    <title>SWAPBlocks Mock Up</title>
+
+</head>
+
+
+<body>
+<ul class="nav justify-content-end navbar-custom" >
+  <li class="nav-item">
+    <a class="nav-link active" href="/">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/asset">Create Asset</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/transaction">Create Transaction</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="https://explorer.swapblocks.io">Explorer</a>
+  </li>
+</ul>
+
+
+
+
+<div align="Center" class="outerform">
+		<!--<img src="{% static "images/logo.png" %}"  />-->
+
+		<h1>SWAPBlocks Interest Rate Swaps</h1>
+		<br >
+
+
+
+
+
+
+{% block body %}
+
+{% endblock %}
+
+</div>
+
+<!-- Footer -->
+<!--<footer class="icofooter">-->
+
+  <!--[> Copyright <]-->
+  <!--<div class="text-center">© 2018 Copyright:-->
+    <!--<a href="http://swapblocks.io"> swapblocks.io</a>-->
+		<!--<p id="disclaimer">Disclaimer: Swapblocks, Inc. does not guarantee nor imply profit from owning SBX coins.</p>-->
+  <!--</div>-->
+  <!--[> Copyright <]-->
+
+<!--</footer>-->
+<!-- Footer -->
+
+
+</body>
+</html>

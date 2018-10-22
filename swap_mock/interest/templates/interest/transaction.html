@@ -1,7 +1,18 @@
-{% extends 'base.html' %}
+{% extends 'baseform.html' %}
+{% load crispy_forms_tags %}
 {% block body %}
 <h1>Create Transaction</h1>
 
+<br />
+
+  <form method="post">
+  
+    {% csrf_token %}
+    {{ TransactionForm|crispy }}
+    <input type="submit" value="Submit">
+
+  </form>
+  <br />
 
 
 

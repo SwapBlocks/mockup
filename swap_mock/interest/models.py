@@ -30,6 +30,9 @@ class Asset(models.Model):
     def __str__(self):
         return f"AssetId: {self.UAI}"
 
+    class Meta:
+        ordering = ['timestamp']
+
 
 class Transaction(models.Model):
     transactionType = models.CharField(choices=TRANSACTION_TYPES,
@@ -54,7 +57,7 @@ class Transaction(models.Model):
     consortiumPacket = models.TextField(blank=True)
     municipalPacket = models.TextField(blank=True)
     confirmations = models.IntegerField(default=0, blank=True)
-
+    validThrough = models.DateTimeField(blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
