@@ -5,8 +5,21 @@ from .forms import IndexAssetForm, TransactionForm
 from django.contrib import messages
 from django.core import serializers
 import json
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from pprint import pprint
 # Create your views here.
+
+
+class AssetListView(ListView):
+
+    model = Asset
+    paginage_by = 20
+
+
+class AssetDetailView(DetailView):
+
+    model = Asset
 
 
 def home(request):
@@ -88,18 +101,19 @@ def last_transaction():
     json_transaction = json.loads(serial_transaction)
     needed_fields = json_transaction[0]['fields']
     needed_fields.pop('timestamp')
+    pprint(needed_fields)
     return needed_fields
 
-def get_coin_data(string_a_coin_name,string_start_date,string_end_date):
-    coin_name = string_a_coin_name
-    start_date = string_start_date
-    end_date = string_end_date
-    url = 'https://coinmarketcap.com/currencies/' + coin_name + '/historical-data/?start=' + start_date + '&end=' + end_date
-    html = requests.get(url).content
-    df_list = pd.read_html(html)
-    df = df_list[-1]
-    list_of_coin_data= df.values.tolist()
-    return list_of_coin_data
+# def get_coin_data(string_a_coin_name,string_start_date,string_end_date):
+    # coin_name = string_a_coin_name
+    # start_date = string_start_date
+    # end_date = string_end_date
+    # url = 'https://coinmarketcap.com/currencies/' + coin_name + '/historical-data/?start=' + start_date + '&end=' + end_date
+    # html = requests.get(url).content
+    # df_list = pd.read_html(html)
+    # df = df_list[-1]
+    # list_of_coin_data= df.values.tolist()
+    # return list_of_coin_data
 
 
 

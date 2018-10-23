@@ -1,0 +1,16 @@
+{% extends 'baseform.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+<h4>{{ object.UAI }}</h4>
+<br />
+
+<p>Consortium Packet: {{ object.consortiumPacket }}</p>
+<p>Municipal Packet: {{ object.municipalPacket }}</p>
+<p>Amount: {{ object.amount }}</p>
+<p>Consortium: {{ object.consortium }}</p>
+<p>Registrar: {{ object.registrar }}</p>
+<p>Weight: {{ object.weight }}</p>
+<p>Valid Through: {{ object.validThrough }}</p>
+
+<br />
+{% endblock %}

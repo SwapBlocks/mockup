@@ -1,0 +1,18 @@
+{% extends 'baseform.html' %}
+{% load crispy_forms_tags %}
+{% block body %}
+<h1> Create Asset </h1>
+<br />
+<ul>
+{% for asset in object_list %}
+
+<li><a href="/asset/{{ asset.pk }}">{{ asset.UAI }}</a></li>
+{% empty %}
+    <li>No assets yet.</li>
+{% endfor %}
+</ul>
+
+
+
+<br />
+{% endblock %}
