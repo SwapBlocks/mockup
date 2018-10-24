@@ -1,18 +1,22 @@
 {% extends 'baseform.html' %}
 {% load crispy_forms_tags %}
 {% block body %}
-<h1> Create Asset </h1>
+<h1> Asset List </h1>
 <br />
-<ul>
-{% for asset in object_list %}
 
-<li><a href="/asset/{{ asset.pk }}">{{ asset.UAI }}</a></li>
-{% empty %}
-    <li>No assets yet.</li>
-{% endfor %}
+<div class="jumbotron jumbotron-fluid">
+<nav>
+<ul class="list-group">
+  {% for asset in object_list %}
+    <li class="list-group-item">
+      <a href="/asset/{{ asset.pk }}">{{ asset.UAI }}</a>
+    </li>
+    {% empty %}
+    <li class="list-group-item">No assets yet.</li>
+  {% endfor %}
 </ul>
-
-
+</nav>
+</div>
 
 <br />
 {% endblock %}

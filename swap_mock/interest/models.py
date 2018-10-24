@@ -30,6 +30,10 @@ class Asset(models.Model):
     def __str__(self):
         return f"AssetId: {self.UAI}"
 
+    def last_transaction(self):
+        transactions = Transaction.objects.filter(standardAsset__UAI=self.UAI)
+        return transactions.last()
+
     class Meta:
         ordering = ['timestamp']
 

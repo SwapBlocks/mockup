@@ -4,13 +4,68 @@
 <h4>{{ object.UAI }}</h4>
 <br />
 
-<p>Consortium Packet: {{ object.consortiumPacket }}</p>
-<p>Municipal Packet: {{ object.municipalPacket }}</p>
-<p>Amount: {{ object.amount }}</p>
-<p>Consortium: {{ object.consortium }}</p>
-<p>Registrar: {{ object.registrar }}</p>
-<p>Weight: {{ object.weight }}</p>
-<p>Valid Through: {{ object.validThrough }}</p>
+<h4>Current State</h4>
+
+<table class="table">
+  <tbody>
+    {% with object.last_transaction as transaction %}
+
+    <tr>
+      <td>Transaction ID:</td>
+      <td>{{ transaction.transactionId }}</td>
+    </tr>
+    <tr>
+      <td>Consortium Packet:</td>
+      <td>{{ transaction.consortiumPacket }}</td>
+    </tr>
+    <tr>
+      <td>Consortium Packet Hash:</td>
+      <td>{{ transaction.consortiumPacketHash }}</td>
+    </tr>
+    <tr>
+      <td>Valid Through:</td>
+      <td>{{ transaction.validThrough }}</td>
+    </tr>
+
+
+    {% endwith %}
+  </tbody>
+</table>
+<br />
+
+<h4>Genesis Asset</h4>
+
+<table class="table">
+  <tbody>
+   <tr>
+      <td>Consortium Packet:</td>
+      <td>{{ object.consortiumPacket }}</td>
+    </tr>
+    <tr>
+      <td>Municipal Packet:</td>
+      <td>{{ object.municipalPacket }}</td>
+    </tr>
+    <tr>
+      <td>Amount:</td>
+      <td>{{ object.amount }}</td>
+    </tr>
+    <tr>
+      <td>Consortium:</td>
+      <td>{{ object.consortium}}</td>
+    </tr>
+    <tr>
+      <td>Registrar</td>
+      <td>{{ object.registrar }}</td>
+    </tr>
+    <tr>
+      <td>Weight</td>
+      <td>{{ object.weight }}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
 
 <br />
 {% endblock %}
