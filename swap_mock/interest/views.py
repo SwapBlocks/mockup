@@ -14,7 +14,7 @@ from pprint import pprint
 class AssetListView(ListView):
 
     model = Asset
-    paginage_by = 20
+    paginage_by = 2
 
 
 class AssetDetailView(DetailView):
@@ -88,7 +88,7 @@ def last_asset():
     needed_fields = json_asset[0]['fields']
     needed_fields.pop('timestamp')
     transaction = last_transaction()
-    needed_fields['transactionId'] = transaction.transactionId
+    needed_fields['transactionId'] = transaction['transactionId']
     return needed_fields
 
 
@@ -104,17 +104,21 @@ def last_transaction():
     pprint(needed_fields)
     return needed_fields
 
-# def get_coin_data(string_a_coin_name,string_start_date,string_end_date):
-    # coin_name = string_a_coin_name
-    # start_date = string_start_date
-    # end_date = string_end_date
-    # url = 'https://coinmarketcap.com/currencies/' + coin_name + '/historical-data/?start=' + start_date + '&end=' + end_date
-    # html = requests.get(url).content
-    # df_list = pd.read_html(html)
-    # df = df_list[-1]
-    # list_of_coin_data= df.values.tolist()
-    # return list_of_coin_data
 
+def get_latest_coin_prices(coin_list):
+    API_KEY_CMC = "8655fbd5-ceac-4ac5-a891-5bc2a437acf7"
+    headers = {'X-CMC_PRO_API_KEY': API_KEY_CMC}
+    try:
+        coins = ",".join(coin_list)
+        uri = f"https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol={coins}&convert=USD"
+        latest_req = requests.get(uri, headers=headers)
+        content = json.loads(latest_req.content.decode())
+        prices = {}
+        for coin in content['data']:
+            prices[coin] = content['data'][coin]['quote']['USD']['price']
+    except:
+        print(content)
+    return prices
 
 
 # ETF
