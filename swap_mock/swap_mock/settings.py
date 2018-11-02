@@ -25,7 +25,7 @@ SECRET_KEY = 'skg&srv7iz%(f16%9_)tvqqd^knr8p^zh8bhsi$70zk09+-j%6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".swapblocks.io", "167.99.82.39", ".praedium.io", "localhost"]
 
 
 # Application definition
